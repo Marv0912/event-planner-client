@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const CreateEvent = () => {
 
     // set one state for the whole data structure
-    const [formData, setFormData] = useState({
+    const [form, setForm] = useState({
         name: '',
         category: 'Important',
         date: '',
@@ -18,16 +18,16 @@ const CreateEvent = () => {
     const handleInputChange = (e) => {
         // destructure to get name and value of field
         const { name, value } = e.target;
-        setFormData((formData) => ({
+        setForm((prevData) => ({
             //spread operator to get data from useState
-            ...formData,
+            ...prevData,
             [name]: value
         }))
     }
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post('url', formData)
+        axios.post('http://localhost:5005/events', form)
             .then((response) => {
                 console.log('Event added: ', response.data);
             })
@@ -38,6 +38,10 @@ const CreateEvent = () => {
             navigate('/')
     }
 
+
+    useEffect(() => {
+        console.log(form)
+    }, [form])
     return (
         <div>
             <Link to={"/"}>
@@ -50,7 +54,7 @@ const CreateEvent = () => {
                     <label>Name</label>
                     <input
                         type="text"
-                        value={formData.name}
+                        name="name"
                         onChange={handleInputChange}
                         required
                     />
@@ -59,14 +63,14 @@ const CreateEvent = () => {
                     <label>Date:</label>
                     <input
                         type="date"
-                        value={formData.date}
+                        name="date"
                         onChange={handleInputChange}
                     />
                 </div>
                 <div>
                     <label>Description:</label>
                     <textarea
-                        value={formData.description}
+                    name='description'
                         onChange={handleInputChange}
                     ></textarea>
                 </div>
@@ -74,14 +78,14 @@ const CreateEvent = () => {
                     <label>Location</label>
                     <input
                         type="text"
-                        value={formData.location}
+                        name="location"
                         onChange={handleInputChange}
                         required
                     />
                 </div>
                 <div>
                     <label>Category:</label>
-                    <select value={formData.category} onChange={handleInputChange}>
+                    <select name="category" onChange={handleInputChange}>
                         <option value="Important">Important</option>
                         <option value="Family">Family</option>
                         <option value="Work">Work</option>
@@ -94,7 +98,7 @@ const CreateEvent = () => {
                     <input
                         //VERIFY TYPE
                         type="time"
-                        value={formData.startTime}
+                        name="startTime"
                         onChange={handleInputChange}
                     />
                 </div>
@@ -102,8 +106,8 @@ const CreateEvent = () => {
                     <label>End Time:</label>
                     <input
                         //VERIFY TYPE
+                        name="endTime"
                         type="time"
-                        value={formData.endTime}
                         onChange={handleInputChange}
                     />
                 </div>
