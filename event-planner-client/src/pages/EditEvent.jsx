@@ -3,7 +3,7 @@
 const EditEvent = () => {
   return (
     <div>
-      
+      edit
     </div>
   );
 }

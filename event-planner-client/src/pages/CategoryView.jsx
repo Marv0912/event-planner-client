@@ -1,11 +1,11 @@
 
 
 const CategoryView = () => {
-  return (
-    <div>
-      
-    </div>
-  );
+    return (
+        <div>
+            category view
+        </div>
+    );
 }
 
 export default CategoryView;
