@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
     return (
-        <div>
-            <ul>
+        <div className="border-end bg-light ">
+            <ul className="list-unstyled" >
                 <li>
-                    <Link to="/create" >Create Event</Link>
+                    <Link to="/create" className="btn btn-primary btn-block mt-4 mb-4">Create Event</Link>
                 </li>
                 <li>
-                    <Link to="/category" >Categories</Link>
+                    <Link to="/category" className="btn btn-primary btn-block">Categories</Link>
                 </li>
             </ul>
         </div>
