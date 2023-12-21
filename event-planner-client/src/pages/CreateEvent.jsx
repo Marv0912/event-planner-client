@@ -3,7 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const CreateEvent = ({ eventFormData, setEventFormData, onCreateEvent }) => {
-
+    function generateUniqueId() {
+        return Math.random().toString(36).slice(2, 11) + Date.now().toString(36);
+    }
     const navigate = useNavigate();
     const handleInputChange = (e) => {
         // destructure to get name and value of field
@@ -17,7 +19,9 @@ const CreateEvent = ({ eventFormData, setEventFormData, onCreateEvent }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post('http://localhost:5005/events', eventFormData)
+        const newEvent = { ...eventFormData, id: generateUniqueId() };
+
+        axios.post('http://localhost:5005/events', newEvent)
             .then((response) => {
                 console.log('Event added: ', response.data);
                 onCreateEvent(response.data);
