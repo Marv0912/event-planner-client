@@ -1,4 +1,4 @@
-import { useEffect, useState  } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
@@ -20,19 +20,34 @@ const EventDetails = () => {
     return <div>Loading...</div>;
   }
   return (
-    <div>
-      <h2>Event Details</h2>
-      <p>{event.name}</p>
-      <p>{event.date}</p>
-      <p>{event.startTime} - {event.endTime}</p>
-      <p>{event.description}</p>
-      <p>{event.location}</p>
-      <p>{event.category}</p>
-      <p>{event.name}</p>
-
-        <Link to={`/${id}/edit`}>
-        <button>Edit button</button>
-        </Link>
+    <div className="container mt-4">
+      
+      <Link to={"/"} className="btn btn-secondary mb-3">Back</Link>
+      <div className="card">
+        <div className="card-header">
+          <h2 className="card-title text-center">{event.name}</h2>
+        </div>
+        <div className="card-body">
+          <p className="card-text">
+            <strong>Date:</strong> {event.date}
+          </p>
+          <p className="card-text">
+            <strong>Time:</strong> {event.startTime} - {event.endTime}
+          </p>
+          <p className="card-text">
+            <strong>Description:</strong> {event.description}
+          </p>
+          <p className="card-text">
+            <strong>Location:</strong> {event.location}
+          </p>
+          <p className="card-text">
+            <strong>Category:</strong> {event.category}
+          </p>
+        </div>
+        <div className="card-footer">
+          <Link to={`/${id}/edit`} className="btn btn-primary">Edit Event</Link>
+        </div>
+      </div>
     </div>
   );
 }
